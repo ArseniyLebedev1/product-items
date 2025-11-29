@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ProductItem } from "./components/ProductItem/ProductItem";
 
 const data = [
   { id: 1, name: "Велосипед", price: 1000, count: 1 },
@@ -11,7 +12,7 @@ const App = () => {
   const [products, setProducts] = useState(data);
 
   const addProduct = () => {
-    const input = prompt("Добваление товара. Введтите в формате Название Цена");
+    const input = prompt("Добваление товара. Введите в формате Название Цена");
 
     if (!input || input.trim() === "") return;
 
@@ -63,33 +64,7 @@ const App = () => {
         Добавить новый товар
       </button>
       <ul className="product-items">
-        {products.map((product) => (
-          <li
-            className="product-item"
-            key={product.id}
-            onDoubleClick={() => deleteProduct(product.id)}
-          >
-            <ul className="product-item-items">
-              <li className="product-item-item">{product.name}</li>
-              <li className="product-item-item">Price: {product.price}</li>
-              <li className="product-item-item">
-                <button
-                  className="product-item-item-button"
-                  onClick={() => decreaseCount(product.id)}
-                >
-                  -
-                </button>
-                {product.count}
-                <button
-                  className="product-item-item-button"
-                  onClick={() => increaseCount(product.id)}
-                >
-                  +
-                </button>
-              </li>
-            </ul>
-          </li>
-        ))}
+        <ProductItem products={products} deleteProduct={deleteProduct} decreaseCount={decreaseCount} increaseCount={increaseCount}/>
       </ul>
     </div>
   );
